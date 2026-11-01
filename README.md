@@ -4,6 +4,10 @@
 
 Completed November 1, 2026 · Okta Integrator (free) org · Solo lab
 
+## Author
+
+Oluwatunmise Aduwo — Computer Science (Cybersecurity), UMass Lowell,
+Class of 2026.
 
 ## What this lab demonstrates
 
@@ -55,7 +59,7 @@ admin account too), I created a separate enrollment policy:
 
 A second, test-groups-only global session policy carries one rule:
 access allowed, Multifactor authentication: Required, and
-users will be prompted for MFA at every sign in — not once, not per
+users will be prompted for MFA at every sign in;  not once, not per
 device.
 
 ![Global session rule — MFA required at every sign-in](images/03-global-session-rule-mfa-required.png)
@@ -146,7 +150,3 @@ and every failure mode is visible.
 Okta (Integrator Free Plan) | Okta Verify mobile app | Box (catalog app
 used as the group-assigned test application)
 
-## Author
-
-Oluwatunmise Aduwo — Computer Science (Cybersecurity), UMass Lowell,
-Class of 2026.
