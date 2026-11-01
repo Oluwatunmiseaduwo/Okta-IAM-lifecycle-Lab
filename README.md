@@ -64,7 +64,7 @@ device.
 
 Box was assigned so that Test User 1 (SOC) and Test User 2 (Helpdesk) hold
 it via Group membership. The contractor appears nowhere in the
-assignment list — the denial is structural, not a per-user exception.
+assignment list; the denial is structural, not a per-user exception.
 
 ![Box assignments — two users, both via Group](images/04-box-assignments-by-group.png)
 
