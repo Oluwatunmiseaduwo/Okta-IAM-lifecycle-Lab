@@ -1,10 +1,9 @@
-# IAM Lifecycle Lab — Okta
+# Okta IAM Lifecycle Lab
 
 **Identity & Access Management lab: user provisioning, group-based application access, MFA policy enforcement, and deprovisioning — built and tested end-to-end in Okta.**
 
 Completed November 1, 2026 · Okta Integrator (free) org · Solo lab
 
----
 
 ## What this lab demonstrates
 
@@ -33,14 +32,14 @@ inbox (`+soc`, `+helpdesk`, `+contractor`), so activation, verification, and
 recovery mail for every identity was actually receivable — a fake address
 would have made the sign-in tests impossible to complete honestly.
 
-## Step 1 — Confirm the authenticators
+## Step 1: Confirm the authenticators
 
 Okta Verify, Email, Passkey (FIDO2 WebAuthn), and Password were all **Active**
 before any policy was written.
 
 ![Authenticators — Okta Verify Active](images/01-authenticators-okta-verify-active.png)
 
-## Step 2 — Enrollment policy: make MFA required for test users only
+## Step 2: Enrollment policy: make MFA required for test users only
 
 The built-in Default Policy applies to **Everyone** and only *optionally*
 offers Okta Verify. Instead of editing it (which would have changed the
@@ -52,7 +51,7 @@ admin account too), I created a separate enrollment policy:
 
 ![Enrollment policy — Lab Test MFA at priority 1](images/02-enrollment-policy-lab-test-mfa.png)
 
-## Step 3 — Global session policy: MFA at every sign-in
+## Step 3: Global session policy: MFA at every sign-in
 
 A second, test-groups-only global session policy carries one rule:
 access allowed, **Multifactor authentication: Required**, and
@@ -61,7 +60,7 @@ device.
 
 ![Global session rule — MFA required at every sign-in](images/03-global-session-rule-mfa-required.png)
 
-## Step 4 — Assign the application by group
+## Step 4: Assign the application by group
 
 Box was assigned so that Test User 1 (SOC) and Test User 2 (Helpdesk) hold
 it **via Group** membership. The contractor appears nowhere in the
@@ -69,7 +68,7 @@ assignment list — the denial is structural, not a per-user exception.
 
 ![Box assignments — two users, both via Group](images/04-box-assignments-by-group.png)
 
-## Step 5 — Sign-in tests (private browser window)
+## Step 5: Sign-in tests (private browser window)
 
 Signing in as the SOC user forced both required factors in sequence:
 first an **email verification** challenge…
@@ -85,9 +84,9 @@ would load.
 
 | User | Group | MFA enforced | Box app |
 |---|---|---|---|
-| Test User 1 | SOC-Analysts | ✅ Email + Okta Verify | ✅ Present |
-| Test User 2 | IT-Helpdesk | ✅ Email + Okta Verify | ✅ Present |
-| Test User 3 | Contractors | ✅ Email + Okta Verify | ❌ Absent |
+| Test User 1 | SOC-Analysts | Email + Okta Verify | Present |
+| Test User 2 | IT-Helpdesk | Email + Okta Verify | Present |
+| Test User 3 | Contractors | Email + Okta Verify | Absent |
 
 **SOC Analyst — Box present in the Work section:**
 
@@ -101,7 +100,7 @@ would load.
 
 ![Contractor dashboard — no applications](images/09-dashboard-contractor-no-apps.png)
 
-## Step 6 — Deprovision the contractor (leaver test)
+## Step 6: Deprovision the contractor
 
 The contractor account was deactivated from the admin console. The People
 list then showed **Test User 3: Deactivated**, with all other accounts
@@ -110,12 +109,12 @@ still Active.
 ![People list — contractor Deactivated](images/10-people-contractor-deactivated.png)
 
 A fresh sign-in attempt as the deactivated contractor failed at the
-password step — deactivation blocks access, it doesn't just change a
+password step; deactivation blocks access, it doesn't just change a
 label:
 
 ![Deactivated user — sign-in failed](images/11-deactivated-user-signin-failed.png)
 
-## Evidence — System Log
+## Evidence: System Log
 
 The System Log confirms the full sequence, including the two events that
 close the lab (times ET):
@@ -140,16 +139,15 @@ In a real organization this lifecycle is driven, not hand-clicked: an HR
 system as the source of truth, SCIM provisioning/deprovisioning into Okta
 and downstream apps, group rules that map job role to group membership
 automatically, and periodic access certifications re-reviewing who still
-needs what. This lab is that same logic, executed manually so every step
-— and every failure mode — is visible.
+needs what. This lab is that same logic, executed manually so every step 
+and every failure mode is visible.
 
 ## Tools used
 
-Okta (Integrator Free Plan) · Okta Verify mobile app · Box (catalog app
+Okta (Integrator Free Plan) | Okta Verify mobile app | Box (catalog app
 used as the group-assigned test application)
 
 ## Author
 
 Oluwatunmise Aduwo — Computer Science (Cybersecurity), UMass Lowell,
-Class of 2026. Part of a hands-on security labs series documenting
-SOC/IAM skills with verifiable proof for each lab.
+Class of 2026.
